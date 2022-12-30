@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="py.icshare.VolumeInformation" table="volumes">
+    <id column="volume_id" name="volumeId"/>
+    <property column="root_volume_id" name="rootVolumeId" type="long"/>
+    <property column="child_volume_id" name="childVolumeId" type="java.lang.Long"/>
+    <property column="domain_id" name="domainId" type="java.lang.Long"/>
+    <property column="volume_size" name="volumeSize" type="long"/>
+    <property column="extending_size" name="extendingSize" type="long"/>
+    <property column="name" name="name" type="string"/>
+    <property column="volume_type" name="volumeType" type="string"/>
+    <property column="volume_status" name="volumeStatus" type="java.lang.String"/>
+    <property column="account_id" name="accountId" type="long"/>
+    <property column="segment_size" name="segmentSize" type="long"/>
+    <property column="tag_key" name="tagKey" type="string"/>
+    <property column="tag_value" name="tagValue" type="string"/>
+    <property column="dead_time" name="deadTime" type="java.lang.Long"/>
+    <property column="limited_IOPS" name="limitedIOPS" type="int"/>
+    <property column="limited_throughput" name="limitedThroughput" type="java.lang.Long"/>
+  </class>
+</hibernate-mapping>

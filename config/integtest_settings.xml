@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations>
+  <project name="*">
+    <file name="log4j.properties">
+      <property name="log4j.rootLogger" value="WARN, FILE"/>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.enable.profiles"
+        range="metric.jmx;metric.graphite;metric.csv;metric.console;metri.slf4j"
+        value="metric.jmx"/>
+      <property name="metric.graphite.ip" value="10.0.1.255"/>
+    </file>
+    <file name="network.properties">
+      <property name="control.flow.subnet" value="10.0.1.0/8"/>
+      <property name="monitor.flow.subnet" value="10.0.1.0/8"/>
+      <property name="enable.data.depart.from.control" value="true"/>
+      <property name="data.flow.subnet" value="100.100.0.0/24"/>
+    </file>
+    <file name="storage.properties">
+      <property name="page.size.byte" value="8192"/>
+      <property name="segment.size.byte" value="1073741824"/>
+    </file>
+    <file name="ietmanager.properties">
+      <property name="iet.bind.nbd" value="/opt/pyd/pyd-client -p %s %s %s"/>
+      <property name="iet.unbind.nbd" value="/opt/pyd/pyd-client -f %s"/>
+      <property name="iet.stop.iscsi" value="/etc/init.d/iscsitarget stop"/>
+      <property name="iet.start.iscsi" value="/etc/init.d/iscsitarget start"/>
+    </file>
+  </project>
+
+  <project name="pengyun-console">
+    <file name="console.properties">
+    </file>
+  </project>
+
+  <project name="pengyun-controlcenter">
+    <file name="controlcenter.properties">
+      <property name="jdbc.driver.class" value="org.postgresql.Driver"/>
+      <property name="jdbc.initial.pool.size" value="5"/>
+      <property name="jdbc.min.pool.size" value="5"/>
+      <property name="jdbc.max.pool.size" value="30"/>
+      <property name="jdbc.url" value="jdbc:postgresql://10.0.1.255:5432/controlandinfodb"/>
+      <property name="license.storage.type" range="file;database" value="database"/>
+      <property name="zookeeper.election.switch" range="true;false" value="true"/>
+      <property name="zookeeper.launcher"
+        value="/opt/zookeeper/zookeeper-3.4.6/bin/zkServer.sh start /opt/zookeeper/zookeeper.cfg"/>
+    </file>
+    <file name="log4j.properties">
+      <property name="log4j.rootLogger" value="WARN,  FILE"/>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.prefix" value="pengyun.integration_test.controlcenter"/>
+    </file>
+    <file name="jmxagent.properties">
+      <property name="jmx.agent.port" value="8110"/>
+      <property name="jmx.agent.switcher" range="on;off" value="on"/>
+    </file>
+  </project>
+
+
+  <project name="pengyun-coordinator">
+    <file name="log4j.properties">
+      <property name="log4j.rootLogger" value="WARN, FILE"/>
+      <property name="log4j.appender.FILE.MaxFileSize" value="100MB"/>
+      <property name="log4j.appender.FILE.MaxBackupIndex" value="2"/>
+    </file>
+    <file name="coordinator.properties">
+      <property name="backoff.time.unit.ms" value="1000"/>
+      <property name="max.write.data.size.per.request" value="1048576"/>
+      <property name="max.read.data.size.per.request" value="1048576"/>
+      <property name="resend.delay.time.unit.ms" value="20"/>
+      <property name="read.write.log.flag" value="false"/>
+      <property name="page.cache.for.read" value="512"/>
+      <property name="read.cache.for.io" value="512"/>
+      <property name="io.depth" value="8"/>
+      <property name="enable.logger.tracer" value="true"/>
+    </file>
+    <file name="jvm.properties">
+      <property name="initial.mem.pool.size" value="256m"/>
+      <property name="min.mem.pool.size" value="256m"/>
+      <property name="max.mem.pool.size" value="512m"/>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.csv.interval.seconds" value="600"/>
+      <property name="metric.prefix" value="pengyun.integration_test.coordinator"/>
+    </file>
+    <file name="jmxagent.properties">
+      <property name="jmx.agent.port" value="9100"/>
+      <property name="jmx.agent.switcher" range="on;off" value="on"/>
+    </file>
+  </project>
+
+  <project name="pengyun-drivercontainer">
+    <file name="log4j.properties">
+      <property name="log4j.rootLogger" value="WARN, FILE"/>
+      <property name="log4j.appender.FILE.MaxFileSize" value="100MB"/>
+      <property name="log4j.appender.FILE.MaxBackupIndex" value="2"/>
+    </file>
+    <file name="drivercontainer.properties">
+      <property name="dashboard.longest.time.second" value="86400"/>
+      <property name="driver.operation.timeout" value="300000"/>
+      <property name="nbd.device.name" value="pyd"/>
+      <property name="create.two.iscsi.target.switch" value="false"/>
+      <property name="system.memory.force.reserved" value="256M"/>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.csv.interval.seconds" value="600"/>
+      <property name="metric.prefix" value="pengyun.integration_test.coordinator"/>
+    </file>
+    <file name="coordinator-jvm.properties">
+      <property name="initial.mem.pool.size" value="800m"/>
+      <property name="min.mem.pool.size" value="800m"/>
+      <property name="max.mem.pool.size" value="800m"/>
+    </file>
+    <file name="fsd-jvm.properties">
+      <property name="fsd.initial.mem.pool.size" value="1024m"/>
+      <property name="fsd.min.mem.pool.size" value="1024m"/>
+      <property name="fsd.max.mem.pool.size" value="1024m"/>
+    </file>
+    <file name="jmxagent.properties">
+      <property name="jmx.agent.port" value="9100"/>
+      <property name="jmx.agent.switcher" range="on;off" value="on"/>
+    </file>
+  </project>
+
+  <project name="pengyun-fs_server">
+    <file name="fsserver.properties">
+      <property name="jdbc.driver.class" value="org.postgresql.Driver"/>
+      <property name="jdbc.url" value="jdbc:postgresql://10.0.1.255:5432/fsserverdb"/>
+      <property name="jdbc.initial.pool.size" value="5"/>
+      <property name="jdbc.min.pool.size" value="5"/>
+      <property name="jdbc.max.pool.size" value="30"/>
+    </file>
+  </project>
+
+  <project name="pengyun-datanode">
+    <file name="datanode.properties">
+      <property name="raw.dirty.page.selection.strategy" value="PF"/>
+      <property name="ssd.dirty.page.selection.strategy" value="TF"/>
+      <property name="enable.ssd.for.data.log" value="false"/>
+      <property name="enable.file.buffer" value="false"/>
+      <!-- if the switch is opened and there are SSD disks in our system, my system will select a SSD disks which capacity is largest to set as level two
+          read cache -->
+      <property name="enable.level.two.cache" range="false;true" value="false"/>
+      <property name="file.buffer.size.gb" value="1"/>
+      <property name="file.buffer.rejection.percent" value="1"/>
+      <property name="max.number.of.plal.worker.pending.page" value="1024"/>
+      <property name="max.number.of.plal.worker.pending.page.for.ssd" value="4096"/>
+      <property name="max.synchronize.time.for.create.log.ms" value="1000"/>
+      <property name="max.pool.size.for.catchup.log.engine.ppl" value="40"/>
+      <property name="max.pool.size.for.catchup.log.engine.pcl" value="40"/>
+      <!-- this is a memory write cache, the larger the value is, the more it caches write data -->
+      <property name="memory.size.for.data.logs.mb" value="3096"/>
+      <property name="number.of.swapping.pages.in.pool" value="80000"/>
+      <property name="janitor.execution.rate.ms" value="60000"/>
+      <property name="plal.number.page.to.apply.per.driver" value="100"/>
+      <property name="py.enable.memory.cache" range="false;true" value="false"/>
+      <property name="py.enable.hdd.cache" range="false;true" value="false"/>
+      <property name="py.enable.ssd.cache" range="false;true" value="false"/>
+      <property name="primary.fast.buffer.percentage" value="30"/>
+      <property name="ppl.number.log.to.persist.per.driver" value="2048"/>
+      <property name="request.new.segment.unit.expiration.threshold.ms" value="80000"/>
+      <property name="secondary.fast.buffer.percentage" value="60"/>
+      <property name="sync.log.fast.buffer.percentage" value="10"/>
+      <property name="swapping.page.timeout.ms" value="0"/>
+      <property name="threshold.to.request.for.new.member.ms" value="120000"/>
+      <property name="wait.for.memory.buffer.timeout.ms" value="10"/>
+      <property name="wait.ms.to.flush.dirty.pages" value="0"/>
+      <property name="wait.time.ms.to.move.segment.to.deleted" value="240000"/>
+      <property name="quarantine.zone.ms.to.create.deleted.segment" value="60000"/>
+      <!--recycle volume allow time = wait* - quarantine*-->
+      <property name="num.files.in.one.segment.unit" value="200"/>
+      <property name="num.logs.in.one.file" value="50000"/>
+      <property name="max.copy.page.iops" value="800"/>
+      <property name="page.cache.for.read" value="4096"/>
+      <property name="read.cache.for.io" value="1024"/>
+      <property name="page.checksum.algorithm" range="DUMMY;ALDER32;DIGEST;CRC32;CRC32C"
+        value="CRC32"/>
+      <property name="network.checksum.algorithm" range="DUMMY;ALDER32;DIGEST;CRC32;CRC32C"
+        value="DIGEST"/>
+      <!-- archive.init.mode append or overwite /-->
+      <property name="archive.init.mode" value="append"/>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.prefix" value="pengyun.integration_test.datanode"/>
+    </file>
+    <file name="jmxagent.properties">
+      <property name="jmx.agent.port" value="10111"/>
+      <property name="jmx.agent.switcher" range="on;off" value="on"/>
+    </file>
+    <file name="jvm.properties">
+      <property name="initial.mem.pool.size" value="12288m"/>
+      <property name="max.mem.pool.size" value="12288m"/>
+    </file>
+  </project>
+
+  <project name="pengyun-deployment_daemon">
+    <file name="deployment_daemon.properties">
+      <property name="max.network.frame.size" value="80000000"/>
+    </file>
+    <file name="ftp.properties">
+      <property name="ftp.server.host" value="10.0.1.255"/>
+      <property name="ftp.server.port" value="21"/>
+      <property name="ftp.server.user.name" value="root"/>
+      <property name="ftp.server.password" value="312"/>
+      <property name="ftp.server.path.root" value="/ftp-files/"/>
+      <property name="log.collect.period" value="60000"/>
+    </file>
+  </project>
+
+  <project name="pengyun-infocenter">
+    <file name="infocenter.properties">
+      <property name="dead.volume.to.remove.second" value="300"/>
+      <property name="instance.metadata.to.remove" value="30000"/>
+      <property name="group.count" value="3"/>
+      <property name="jdbc.driver.class" value="org.postgresql.Driver"/>
+      <property name="jdbc.url" value="jdbc:postgresql://10.0.1.255:5432/controlandinfodb"/>
+      <property name="jdbc.initial.pool.size" value="5"/>
+      <property name="jdbc.min.pool.size" value="5"/>
+      <property name="jdbc.max.pool.size" value="30"/>
+      <property name="zookeeper.election.switch" range="true;false" value="true"/>
+      <property name="zookeeper.launcher"
+        value="/opt/zookeeper/zookeeper-3.4.6/bin/zkServer.sh start /opt/zookeeper/zookeeper.cfg"/>
+    </file>
+    <file name="log4j.properties">
+      <property name="log4j.rootLogger" value="WARN, FILE"/>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.prefix" value="pengyun.integration_test.infocenter"/>
+    </file>
+    <file name="jmxagent.properties">
+      <property name="jmx.agent.port" value="8120"/>
+      <property name="jmx.agent.switcher" range="on;off" value="on"/>
+    </file>
+  </project>
+
+  <project name="pengyun-instancehub">
+    <file name="instancehub.properties">
+      <property name="center.dih.endpoint" value="10.0.1.255:10000"/>
+      <property name="time.ok.to.inc" value="5000"/>
+      <property name="time.failed.to.forgotten.of.local" value="10000"/>
+      <property name="time.failed.to.forgotten" value="10000"/>
+      <property name="time.forgotten.to.remove.of.local" value="10000"/>
+      <property name="time.forgotten.to.remove" value="10000"/>
+    </file>
+    <file name="log4j.properties">
+      <property name="log4j.rootLogger" value="WARN, FILE"/>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.prefix" value="pengyun.integration_test.instancehub"/>
+    </file>
+    <file name="jmxagent.properties">
+      <property name="jmx.agent.port" value="10100"/>
+      <property name="jmx.agent.switcher" range="on;off" value="on"/>
+    </file>
+  </project>
+
+  <project name="pengyun-system_monitor">
+    <file name="monitorcenter.properties">
+      <property name="zookeeper.election.switch" range="true;false" value="true"/>
+      <property name="jdbc.driver.class" value="org.postgresql.Driver"/>
+      <property name="jdbc.url" value="jdbc:postgresql://10.0.1.255:5432/monitorcenterdb"/>
+      <property name="jdbc.initial.pool.size" value="5"/>
+      <property name="jdbc.min.pool.size" value="5"/>
+      <property name="jdbc.max.pool.size" value="30"/>
+      <property name="attribute.update.rate" value="30000"/>
+      <property name="attribute.update.delay" value="30000"/>
+      <property name="store.memory.watermark" value="10000"/>
+      <property name="work.network.latency.rate" value="5000"/>
+      <property name="work.network.latency.threshold" value="1000"/>
+
+      <property name="jmx.agent.port.inforcenter"
+        value="ref:pengyun-infocenter|jmxagent.properties|jmx.agent.port"/>
+      <property name="jmx.agent.port.controlcenter"
+        value="ref:pengyun-controlcenter|jmxagent.properties|jmx.agent.port"/>
+      <property name="jmx.agent.port.drivercontainer"
+        value="ref:pengyun-drivercontainer|jmxagent.properties|jmx.agent.port"/>
+      <property name="jmx.agent.port.datanode"
+        value="ref:pengyun-datanode|jmxagent.properties|jmx.agent.port"/>
+      <property name="jmx.agent.port.dih"
+        value="ref:pengyun-instancehub|jmxagent.properties|jmx.agent.port"/>
+      <property name="jmx.agent.port.monitorcenter"
+        value="ref:pengyun-system_monitor|jmxagent.properties|jmx.agent.port"/>
+
+      <property name="metric.domain.infocenter">
+        <sub_property index="0" value="ref:pengyun-infocenter|metric.properties|metric.prefix"/>
+        <sub_property index="1" value="pojo-agent-JVM"/>
+      </property>
+      <property name="metric.domain.controcenter">
+        <sub_property index="0" value="ref:pengyun-controlcenter|metric.properties|metric.prefix"/>
+        <sub_property index="1" value="pojo-agent-JVM"/>
+      </property>
+      <property name="metric.domain.drivercontainer">
+        <sub_property index="0" value="ref:pengyun-coordinator|metric.properties|metric.prefix"/>
+        <sub_property index="1" value="pojo-agent-JVM"/>
+      </property>
+      <property name="metric.domain.coordinator">
+        <sub_property index="0" value="ref:pengyun-coordinator|metric.properties|metric.prefix"/>
+        <sub_property index="1" value="pojo-agent-JVM"/>
+      </property>
+      <property name="metric.domain.datanode">
+        <sub_property index="0" value="ref:pengyun-datanode|metric.properties|metric.prefix"/>
+        <sub_property index="1" value="pojo-agent-JVM"/>
+      </property>
+      <property name="metric.domain.dih">
+        <sub_property index="0" value="ref:pengyun-instancehub|metric.properties|metric.prefix"/>
+        <sub_property index="1" value="pojo-agent-JVM"/>
+        <sub_property index="2" value="pojo-agent-MACHINE"/>
+      </property>
+      <property name="metric.domain.monitorcenter">
+        <sub_property index="0" value="ref:pengyun-system_monitor|metric.properties|metric.prefix"/>
+        <sub_property index="1" value="pojo-agent-JVM"/>
+      </property>
+    </file>
+    <file name="metric.properties">
+      <property name="metric.prefix" value="pengyun.monitorcenter"/>
+    </file>
+    <file name="log4j.properties">
+      <property name="log4j.rootLogger" value="WARN, FILE"/>
+    </file>
+    <file name="jmxagent.properties">
+      <property name="jmx.agent.port" value="11100"/>
+      <property name="jmx.agent.switcher" range="on;off" value="on"/>
+    </file>
+  </project>
+</configurations>

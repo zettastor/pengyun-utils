@@ -1,0 +1,13 @@
+.classpath
+.project
+.settings
+target
+*.log
+/bin
+*.log.
+round
+logs
+*.jar
+test-output/
+*.iml
+.flattened-pom.xml
