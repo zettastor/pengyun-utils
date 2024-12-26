@@ -207,21 +207,6 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <artifactId>swing-layout</artifactId>
-      <groupId>net.java.dev.swing-layout</groupId>
-      <version>1.0.2</version>
-    </dependency>
-    <dependency>
-      <artifactId>swing-layout</artifactId>
-      <groupId>org.swinglabs</groupId>
-      <version>1.0.3</version>
-    </dependency>
-    <dependency>
-      <artifactId>mysql-connector-java</artifactId>
-      <groupId>mysql</groupId>
-      <version>5.1.22</version>
-    </dependency>
-    <dependency>
       <artifactId>commons-jexl</artifactId>
       <groupId>org.apache.commons</groupId>
       <version>2.1.1</version>
@@ -241,7 +226,7 @@
   <parent>
     <artifactId>dbs-root</artifactId>
     <groupId>com.pengyun.dbs</groupId>
-    <version>1.0.0-OS-SNAPSHOT</version>
+    <version>${revision}</version>
   </parent>
   <properties>
     <!-- on : do proguard -->
